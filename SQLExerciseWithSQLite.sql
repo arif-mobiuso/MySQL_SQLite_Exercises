@@ -184,7 +184,7 @@ ON g.GenreId = t.GenreId ;
 -- solution
 
 select art.Name as Artist_name ,
-		count(InvoiceLineId) as Artist_Total_sales
+		count(i.Quantity) as Artist_Total_sales
 from invoiceLine as i
     join track as t on i.TrackId = t.TrackId
     join album as a on a.AlbumId= t.AlbumId
@@ -211,12 +211,15 @@ limit 1 ;
   -- solution
   
 SELECT track.Name , 
-		InvoiceLine.Quantity as Units_sold
+		sum(InvoiceLine.Quantity )as Units_sold
 from Track
 join InvoiceLine 
 	on InvoiceLine.TrackId = Track.TrackId
 join Invoice 
 	on invoice.InvoiceId = InvoiceLine.InvoiceId
-where Invoice.InvoiceDate = "2013%" ; 
-  
+where Invoice.InvoiceDate like "2013%"
+group by InvoiceLine.TrackId ; 
+
+
+
 
