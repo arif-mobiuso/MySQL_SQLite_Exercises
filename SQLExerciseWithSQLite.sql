@@ -197,8 +197,26 @@ limit 10 ;
 -- 9 Q.9 Provide a query that shows the most purchased Media Type. 
 -- solution
 
+SELECT  MediaType.Name AS MostPurchasedMediaType 
+from MediaType
+join Track 
+	on track.MediaTypeId = MediaType.MediaTypeId 
+join InvoiceLine 
+	on track.TrackId = InvoiceLine.TrackId
+ORDER BY (InvoiceLine.Quantity * InvoiceLine.UnitPrice) desc 
+limit 1 ; 
+
 
   --- 10 Q.10 Provide a query that shows the purchased tracks of 2013. Display Track name and Units sold.
   -- solution
+  
+SELECT track.Name , 
+		InvoiceLine.Quantity as Units_sold
+from Track
+join InvoiceLine 
+	on InvoiceLine.TrackId = Track.TrackId
+join Invoice 
+	on invoice.InvoiceId = InvoiceLine.InvoiceId
+where Invoice.InvoiceDate = "2013%" ; 
   
 
