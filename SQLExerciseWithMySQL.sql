@@ -25,13 +25,13 @@ describe actor;
  -- solution
  
  select * from actor 
- where last_name = "JOHANSSON" and actor_id is not null;
+ where last_name = "JOHANSSON" ;
  
  -- Q6 Display the first and last name of each actor in a single column in upper case letters. Name the column Actor Name. (200 rows)
  -- solution
  
  select 
- upper(concat(first_name , last_name)) as ActorName
+ upper(concat(first_name  ," ", last_name)) as "Actor Name"
  from actor ;
  
  
@@ -97,10 +97,7 @@ select count(*) as Total_Rows  from city ;
  limit 1 ; 
  
  
- -- using subQuery
- select * from city 
- where population = 
- (select max(population) from city) ; 
+
  
  
  -- Q5 Using city table find out the least populated city. 
@@ -169,14 +166,14 @@ limit 1 ;
 --  Q2 What is the average length of films by category? 
 -- solution
 
-select c.name ,
-		avg(f.length) as Average 
-from film as f 
-inner join film_category fc  
-		on f.film_id = fc.film_id 
-inner join  category c 
-		on fc.category_id = c .category_id
-group by c.category_id ;
+select category.name ,
+		avg(film.length) as Average 
+from film
+inner join film_category 
+		on film.film_id = film_category.film_id 
+inner join  category  
+		on film_category.category_id = category.category_id
+group by category.category_id ;
 
 --  Q3 Which film categories are long? (5 rows) 
 -- solution
@@ -199,8 +196,7 @@ select f.title  ,
 from film as f
 join inventory as i 
 	on f.film_id = i.film_id
-where f.title = "Hunchback Impossible"
-group by f.film_id ; 
+where f.title = "Hunchback Impossible";
 
 
  --  Q5 Using the tables “payment” and “customer” and the JOIN command, list the total paid by each customer.
@@ -248,12 +244,7 @@ SELECT
 FROM
     employees
 WHERE
-    department_id IN (SELECT 
-            department_id
-        FROM
-            employees
-        WHERE
-            department_id = 100) ; 
+    department_id IN (SELECT 100) ; 
             
             
 -- 2 Q2. Write a query to display the dept_id, maximum salary, of all the departments 
