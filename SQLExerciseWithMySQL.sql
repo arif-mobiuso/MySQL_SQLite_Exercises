@@ -14,7 +14,11 @@ describe actor;
 --  Q3 Display the schema which was used to create table “actor” and view the complete schema using the viewer. (1 row) 
 -- solution
 
+<<<<<<< HEAD
  show create table actor;
+=======
+ show create table  actor;
+>>>>>>> 3b5539b3764e97bfe4f823e26a5baa4cdf3bf231
  
  -- Q4 Display the first and last names of all actors from the table actor. (200 rows) 
  -- solution
